@@ -1,0 +1,406 @@
+/* Global */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0f172a; /* slate-900 */
+  background: #f8fafc; /* slate-50 */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Layout helpers */
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.section.alt {
+  background: #ffffff;
+}
+
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.section h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+}
+
+.section-lead {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+/* Nav */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.brand-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+.nav-links a {
+  opacity: 0.85;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.nav-cta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #f9fafb;
+  font-size: 0.85rem;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-ghost {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.85rem;
+  color: #0f172a;
+  background: #f9fafb;
+}
+
+.btn-ghost:hover {
+  background: #e5e7eb;
+}
+
+.link-light {
+  font-size: 0.85rem;
+  color: #bfdbfe;
+}
+
+/* Hero */
+.hero {
+  background: radial-gradient(circle at top left, #1e293b, #020617);
+  color: #e5e7eb;
+  padding: 4rem 1.5rem 3rem;
+}
+
+.hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+.hero-text h1 {
+  font-size: 2.1rem;
+  margin: 0 0 0.75rem;
+}
+
+.hero-sub {
+  font-size: 0.95rem;
+  color: #cbd5f5;
+  margin-bottom: 1rem;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 0.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero-footnote {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Hero card */
+.hero-card {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #1f2937;
+}
+
+.hero-card h2 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.hero-card-text {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+  margin-bottom: 1rem;
+}
+
+.value-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 600px) {
+  .value-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.value-col {
+  background: #020617;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.value-col h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+}
+
+.value-col ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.78rem;
+  color: #cbd5f5;
+}
+
+.value-bridge {
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(37, 99, 235, 0.2);
+  border: 1px solid #60a5fa;
+  font-size: 0.78rem;
+}
+
+/* Cards grid */
+.cards-3 {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .cards-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.alt .card {
+  background: #f9fafb;
+}
+
+/* Steps */
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.step {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #f9fafb;
+  font-size: 0.75rem;
+}
+
+/* Blueprint image */
+.blueprint img {
+  max-width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+}
+
+/* Pricing */
+.pricing {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .pricing {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.pricing .card {
+  height: 100%;
+}
+
+.card-highlight {
+  border-color: #2563eb;
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.12);
+}
+
+.pricing-price {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Partner list */
+.partner-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.partner-list li {
+  margin-bottom: 0.35rem;
+}
+
+/* Contact form */
+.contact-form {
+  max-width: 720px;
+  font-size: 0.9rem;
+}
+
+.form-row {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .form-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  font: inherit;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+.form-note {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Footer */
+.footer {
+  background: #020617;
+  color: #9ca3af;
+  font-size: 0.8rem;
+}
+
+.footer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+@media (min-width: 700px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
