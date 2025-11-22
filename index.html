@@ -2,295 +2,367 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Auto-Bridge – Trusted Canada → Nigeria Vehicle Imports</title>
+  <title>Auto-Bridge – Canada → Nigeria Vehicle Imports</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- INLINE CSS (GitHub-friendly) -->
   <style>
-    /* ---------- GLOBAL ---------- */
-    *, *::before, *::after {
+    /* ------------ GLOBAL ------------ */
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
+
     :root {
-      --bg-dark: #020617;
-      --bg-darker: #020314;
+      --bg-body: #020617;
+      --bg-panel: #0b1120;
       --bg-light: #f8fafc;
+      --bg-soft: #e2e8f0;
       --primary: #2563eb;
       --primary-soft: #dbeafe;
+      --primary-strong: #1d4ed8;
       --accent: #38bdf8;
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --border-soft: #e2e8f0;
       --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.16);
-      --shadow-card: 0 12px 30px rgba(15, 23, 42, 0.12);
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.24);
+      --shadow-card: 0 12px 30px rgba(15, 23, 42, 0.16);
     }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #0f172a, #020617);
+      background: radial-gradient(circle at top left, #020617, #020617);
       color: var(--text-main);
     }
+
     a {
       text-decoration: none;
       color: inherit;
     }
+
     img {
       max-width: 100%;
       display: block;
     }
 
-    /* ---------- LAYOUT HELPERS ---------- */
     .page {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
+
     .section {
       padding: 4rem 1.5rem;
     }
+
     .section-inner {
       max-width: 1120px;
       margin: 0 auto;
     }
+
     .section-title {
       font-size: 1.6rem;
-      margin: 0 0 0.5rem;
+      margin: 0 0 0.6rem;
     }
+
     .section-lead {
       font-size: 0.98rem;
       color: var(--text-muted);
-      max-width: 640px;
-      margin-bottom: 2rem;
+      max-width: 650px;
+      margin: 0 0 2rem;
     }
 
-    /* ---------- NAVBAR ---------- */
+    /* ------------ NAVBAR ------------ */
     .nav {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.72));
-      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      z-index: 40;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.82));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
     }
+
     .nav-inner {
       max-width: 1120px;
       margin: 0 auto;
       padding: 0.75rem 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+      gap: 1.25rem;
       color: #e5e7eb;
     }
+
     .brand {
       display: flex;
       align-items: center;
       gap: 0.6rem;
     }
+
     .brand-mark {
       width: 30px;
       height: 30px;
       border-radius: 10px;
       background: conic-gradient(from 180deg, #22d3ee, #1d4ed8, #22c55e, #22d3ee);
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.45);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.6);
     }
+
     .brand-name {
       font-weight: 600;
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
     }
+
     .nav-links {
       display: none;
       gap: 1rem;
       font-size: 0.86rem;
       opacity: 0.9;
     }
+
     .nav-links a:hover {
       opacity: 1;
       color: var(--accent);
     }
+
     .nav-cta {
+      margin-left: auto;
       display: flex;
       gap: 0.6rem;
       align-items: center;
     }
+
     .nav-cta a {
       font-size: 0.84rem;
     }
+
     .nav-link-light {
       color: #cbd5f5;
     }
+
+    /* ------------ BUTTONS ------------ */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      padding: 0.4rem 0.95rem;
+      padding: 0.45rem 1rem;
       border: 1px solid transparent;
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       cursor: pointer;
-      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease,
-        box-shadow 0.18s ease;
+      transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease,
+        transform 0.1s ease;
     }
+
     .btn-primary {
-      background: #2563eb;
+      background: var(--primary);
       color: #f9fafb;
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.5);
     }
+
     .btn-primary:hover {
-      background: #1d4ed8;
+      background: var(--primary-strong);
+      box-shadow: 0 16px 35px rgba(37, 99, 235, 0.6);
       transform: translateY(-1px);
-      box-shadow: 0 16px 35px rgba(37, 99, 235, 0.55);
     }
-    .btn-ghost {
-      border-color: rgba(148, 163, 184, 0.7);
+
+    .btn-ghost-dark {
+      border-color: rgba(148, 163, 184, 0.75);
       color: #e5e7eb;
       background: transparent;
     }
-    .btn-ghost:hover {
-      background: rgba(15, 23, 42, 0.7);
+
+    .btn-ghost-dark:hover {
+      background: rgba(15, 23, 42, 0.82);
     }
 
-    /* ---------- HERO ---------- */
+    .btn-ghost-light {
+      border-color: var(--bg-soft);
+      color: var(--text-main);
+      background: #ffffff;
+    }
+
+    .btn-ghost-light:hover {
+      background: #e5e7eb;
+    }
+
+    /* ------------ HERO ------------ */
     .hero {
       padding: 4.5rem 1.5rem 3.5rem;
       color: #e5e7eb;
       background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.35), transparent 55%),
-        radial-gradient(circle at 120% 0%, rgba(56, 189, 248, 0.3), transparent 55%),
+        radial-gradient(circle at -10% -30%, rgba(59, 130, 246, 0.6), transparent 55%),
+        radial-gradient(circle at 120% 10%, rgba(56, 189, 248, 0.4), transparent 60%),
         linear-gradient(to bottom, #020617, #020314 55%, #020617 100%);
-      flex: 1;
     }
+
     .hero-inner {
       max-width: 1120px;
       margin: 0 auto;
       display: grid;
-      gap: 2.75rem;
+      gap: 2.5rem;
     }
+
     @media (min-width: 900px) {
       .hero-inner {
-        grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
         align-items: center;
       }
     }
+
     .eyebrow {
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
       color: #a5b4fc;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.7rem;
     }
+
     .hero-title {
       font-size: 2.3rem;
-      line-height: 1.1;
-      margin: 0 0 0.9rem;
+      line-height: 1.12;
+      margin: 0 0 0.8rem;
     }
+
     .hero-sub {
       font-size: 0.98rem;
       max-width: 540px;
       color: #cbd5f5;
-      margin-bottom: 1.1rem;
+      margin-bottom: 1rem;
     }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.8rem;
     }
+
     .hero-note {
       font-size: 0.78rem;
       color: #94a3b8;
     }
 
     .hero-card {
-      background: rgba(15, 23, 42, 0.92);
+      background: rgba(15, 23, 42, 0.9);
       border-radius: 22px;
       padding: 1.6rem 1.5rem 1.4rem;
       border: 1px solid rgba(148, 163, 184, 0.35);
       box-shadow: var(--shadow-soft);
     }
+
     .hero-card h2 {
       margin: 0 0 0.4rem;
       font-size: 1rem;
     }
+
     .hero-card p {
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       color: #cbd5f5;
       margin-bottom: 1rem;
     }
 
-    .value-grid {
+    /* QUICK TOOLS BAR */
+    .quick-tools {
       display: grid;
-      gap: 0.8rem;
-      margin-bottom: 0.9rem;
+      gap: 1rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
     }
-    @media (min-width: 600px) {
-      .value-grid {
+
+    @media (min-width: 720px) {
+      .quick-tools {
+        grid-template-columns: 2.1fr 1.1fr;
+      }
+    }
+
+    .tool-card {
+      background: #020617;
+      border-radius: 16px;
+      padding: 0.9rem 1rem 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .tool-card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.85rem;
+      color: #e5e7eb;
+    }
+
+    .tool-row {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 720px) {
+      .tool-row.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .tool-row.two {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
-    .value-col {
-      background: #020617;
-      border-radius: 14px;
-      padding: 0.8rem 0.9rem;
-      border: 1px solid rgba(30, 64, 175, 0.7);
-    }
-    .value-col h3 {
-      margin: 0 0 0.4rem;
-      font-size: 0.8rem;
-      color: #e5e7eb;
-    }
-    .value-col ul {
-      margin: 0;
-      padding-left: 1.05rem;
-      list-style: disc;
-      color: #cbd5f5;
-      font-size: 0.78rem;
-    }
-    .value-bridge {
-      border-radius: 14px;
-      padding: 0.75rem 0.9rem;
-      background: rgba(37, 99, 235, 0.2);
-      border: 1px solid rgba(129, 140, 248, 0.9);
-      font-size: 0.78rem;
-      color: #e5e7eb;
-    }
-    .value-bridge strong {
-      display: block;
-      margin-bottom: 0.25rem;
+
+    .field-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      margin-bottom: 0.15rem;
     }
 
-    /* ---------- CONTENT SECTIONS ---------- */
+    .field-input,
+    .field-select {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 0.4rem 0.6rem;
+      font-size: 0.8rem;
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+    }
+
+    .field-input::placeholder {
+      color: #64748b;
+    }
+
+    .est-output {
+      margin-top: 0.35rem;
+      font-size: 0.75rem;
+      color: #a5b4fc;
+    }
+
+    /* ------------ MAIN CONTENT WRAP ------------ */
     .content {
       background: var(--bg-light);
       border-radius: 28px 28px 0 0;
       margin-top: -1px;
-      box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.4);
+      box-shadow: 0 -12px 32px rgba(15, 23, 42, 0.5);
+      flex: 1;
     }
 
+    /* ------------ CARD GRIDS ------------ */
     .card-grid-3 {
       display: grid;
-      gap: 1.4rem;
+      gap: 1.3rem;
     }
+
     @media (min-width: 900px) {
       .card-grid-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
+
     .card {
       background: #ffffff;
       border-radius: var(--radius-lg);
-      padding: 1.25rem 1.3rem 1.1rem;
-      border: 1px solid var(--border-soft);
+      padding: 1.2rem 1.3rem 1.1rem;
+      border: 1px solid var(--bg-soft);
       box-shadow: var(--shadow-card);
       font-size: 0.9rem;
-    }
-    .card h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1rem;
-    }
-    .card p {
-      margin: 0;
-      color: var(--text-muted);
     }
 
     .card-soft {
@@ -298,159 +370,318 @@
       box-shadow: none;
     }
 
-    /* Steps */
-    .steps {
-      display: grid;
-      gap: 1.1rem;
+    .card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
     }
-    .step {
-      display: flex;
-      gap: 0.9rem;
-      align-items: flex-start;
-      font-size: 0.9rem;
-    }
-    .step-number {
-      min-width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: var(--primary);
-      color: #f9fafb;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-    }
-    .step h3 {
-      margin: 0 0 0.3rem;
-      font-size: 0.98rem;
-    }
-    .step p {
+
+    .card p {
       margin: 0;
       color: var(--text-muted);
     }
 
-    /* Pricing */
+    /* ------------ TABS (FOR DEALERS / DIASPORA) ------------ */
+    .tabs {
+      border-radius: var(--radius-lg);
+      background: #ffffff;
+      border: 1px solid var(--bg-soft);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .tab-header-row {
+      display: flex;
+      border-bottom: 1px solid var(--bg-soft);
+      background: #f8fafc;
+    }
+
+    .tab-toggle {
+      flex: 1;
+      padding: 0.7rem 0.9rem;
+      text-align: center;
+      font-size: 0.86rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-toggle.active {
+      border-bottom-color: var(--primary);
+      color: var(--primary-strong);
+      background: #ffffff;
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 1.1rem 1.3rem 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .tab-panel h3 {
+      margin-top: 0;
+      font-size: 1rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0.6rem 0 0.2rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1e3a8a;
+    }
+
+    /* ------------ DASHBOARD PREVIEW ------------ */
+    .dash-grid {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    @media (min-width: 900px) {
+      .dash-grid {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      }
+    }
+
+    .dash-panel {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--bg-soft);
+      box-shadow: var(--shadow-card);
+      font-size: 0.86rem;
+    }
+
+    .dash-panel h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.96rem;
+    }
+
+    .dash-kpis {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    @media (min-width: 640px) {
+      .dash-kpis {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .kpi-card {
+      border-radius: 14px;
+      padding: 0.5rem 0.6rem;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+    }
+
+    .kpi-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #94a3b8;
+      margin-bottom: 0.15rem;
+    }
+
+    .kpi-value {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .ship-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.6rem;
+    }
+
+    .ship-table th,
+    .ship-table td {
+      padding: 0.45rem 0.35rem;
+      font-size: 0.78rem;
+      text-align: left;
+    }
+
+    .ship-table thead th {
+      border-bottom: 1px solid var(--bg-soft);
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .ship-table tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.12rem 0.48rem;
+      font-size: 0.7rem;
+    }
+
+    .badge-green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-amber {
+      background: #fef9c3;
+      color: #92400e;
+    }
+
+    .badge-blue {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .dash-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .timeline {
+      border-left: 2px solid #e5e7eb;
+      padding-left: 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .timeline-step {
+      margin-bottom: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .timeline-step strong {
+      display: inline-block;
+      margin-bottom: 0.1rem;
+    }
+
+    /* ------------ PRICING ------------ */
     .pricing-grid {
       display: grid;
       gap: 1.5rem;
     }
+
     @media (min-width: 768px) {
       .pricing-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
+
     .pricing-card {
       background: #ffffff;
       border-radius: var(--radius-lg);
-      padding: 1.4rem 1.5rem 1.2rem;
-      border: 1px solid var(--border-soft);
+      padding: 1.3rem 1.4rem 1.1rem;
+      border: 1px solid var(--bg-soft);
       box-shadow: var(--shadow-card);
       font-size: 0.9rem;
+      position: relative;
     }
+
     .pricing-card.highlight {
       border-color: var(--primary);
       box-shadow: 0 18px 45px rgba(37, 99, 235, 0.25);
-      position: relative;
-      overflow: hidden;
     }
-    .pricing-card.highlight::before {
-      content: "Most relevant for dealers";
-      position: absolute;
-      top: 0.9rem;
-      right: 1rem;
-      font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      color: #1d4ed8;
+
+    .pricing-title {
+      margin: 0 0 0.1rem;
     }
-    .pricing-card h3 {
-      margin: 0 0 0.2rem;
-    }
+
     .pricing-price {
-      font-weight: 600;
       margin: 0 0 0.7rem;
+      font-weight: 600;
       font-size: 0.95rem;
     }
+
     .pricing-card ul {
       margin: 0;
       padding-left: 1.1rem;
       color: var(--text-muted);
     }
+
     .pricing-card li {
       margin-bottom: 0.3rem;
     }
 
-    /* Contact form (non-functional placeholder) */
+    /* ------------ CONTACT FORM ------------ */
     .contact-form {
       max-width: 720px;
       font-size: 0.9rem;
     }
+
     .form-row {
       display: grid;
       gap: 1rem;
     }
-    @media (min-width: 768px) {
+
+    @media (min-width: 720px) {
       .form-row {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
+
     .form-field {
       margin-bottom: 1rem;
     }
+
     .form-field label {
       display: block;
       font-size: 0.8rem;
       font-weight: 500;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.25rem;
     }
+
     .form-field input,
     .form-field textarea {
       width: 100%;
       border-radius: 10px;
-      border: 1px solid var(--border-soft);
-      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--bg-soft);
+      padding: 0.6rem 0.7rem;
       font: inherit;
       resize: vertical;
     }
+
     .form-field input:focus,
     .form-field textarea:focus {
       outline: 2px solid var(--primary);
       outline-offset: 1px;
     }
+
     .form-note {
-      margin-top: 0.5rem;
+      margin-top: 0.45rem;
       font-size: 0.78rem;
       color: var(--text-muted);
     }
 
-    /* Partner list */
-    .bullet-list {
-      margin: 0;
-      padding-left: 1.1rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-    .bullet-list li {
-      margin-bottom: 0.35rem;
-    }
-
-    /* Footer */
+    /* ------------ FOOTER ------------ */
     .footer {
-      background: var(--bg-darker);
-      color: #9ca3af;
+      background: #020314;
+      color: #94a3b8;
       font-size: 0.8rem;
     }
+
     .footer-inner {
       max-width: 1120px;
       margin: 0 auto;
       padding: 1.4rem 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.25rem;
     }
-    @media (min-width: 700px) {
+
+    @media (min-width: 720px) {
       .footer-inner {
         flex-direction: row;
         justify-content: space-between;
@@ -458,15 +689,16 @@
       }
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-    }
-    @media (min-width: 768px) {
+    /* ------------ RESPONSIVE NAV ------------ */
+    @media (min-width: 840px) {
       .nav-links {
         display: flex;
+      }
+    }
+
+    @media (max-width: 839px) {
+      .nav-links {
+        display: none;
       }
     }
   </style>
@@ -478,12 +710,13 @@
       <div class="nav-inner">
         <div class="brand">
           <div class="brand-mark"></div>
-          <div class="brand-name">AUTO-BRIDGE</div>
+          <span class="brand-name">AUTO-BRIDGE</span>
         </div>
         <nav class="nav-links">
           <a href="#how">How it works</a>
           <a href="#problem">Problem</a>
-          <a href="#features">Features</a>
+          <a href="#customers">Customers</a>
+          <a href="#dashboard">Dealer portal</a>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Pilot</a>
         </nav>
@@ -494,41 +727,94 @@
       </div>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO & QUICK TOOLS -->
     <section class="hero">
       <div class="hero-inner">
         <div>
           <p class="eyebrow">Canada → Nigeria vehicle & cargo corridor</p>
           <h1 class="hero-title">
-            Trusted cross-border vehicle imports for Nigerian dealers and importers.
+            A dealer-first platform for trusted cross-border vehicle imports.
           </h1>
           <p class="hero-sub">
-            Auto-Bridge verifies vehicles, estimates true landed cost, aligns documentation with
-            Nigerian Customs and tracks every shipment end-to-end — so dealers can import with confidence.
+            Auto-Bridge verifies vehicles, estimates true landed cost, coordinates documentation with
+            Nigerian Customs and tracks every shipment end-to-end — so independent dealers and fleet
+            operators can import with confidence.
           </p>
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Join the dealer pilot</a>
-            <a href="#how" class="btn btn-ghost">See how it works</a>
+            <a href="#contact" class="btn btn-primary">Join the Lagos dealer pilot</a>
+            <a href="#how" class="btn btn-ghost-dark">Preview the workflow</a>
           </div>
           <p class="hero-note">
-            Designed for independent dealers, fleet operators and diaspora shippers who use the Canada → Lagos lane.
+            Designed for importers using Canadian auctions and sellers. Pilot cohort: dealers importing
+            100–300 vehicles per year.
           </p>
+
+          <!-- QUICK TOOLS BAR -->
+          <div class="quick-tools">
+            <!-- Landed cost teaser -->
+            <div class="tool-card">
+              <h3>Quick landed-cost estimate (demo)</h3>
+              <div class="tool-row three">
+                <div>
+                  <div class="field-label">Vehicle value (CAD)</div>
+                  <input class="field-input" type="number" placeholder="e.g. 12,000" />
+                </div>
+                <div>
+                  <div class="field-label">Port of arrival</div>
+                  <select class="field-select">
+                    <option>Apapa</option>
+                    <option>Tin Can</option>
+                    <option>Onne</option>
+                  </select>
+                </div>
+                <div>
+                  <div class="field-label">Vehicle type</div>
+                  <select class="field-select">
+                    <option>Sedan / hatchback</option>
+                    <option>SUV / crossover</option>
+                    <option>Truck / van</option>
+                  </select>
+                </div>
+              </div>
+              <p class="est-output">
+                Demo output: “Estimated landed cost ≈ CAD 24,800 – 27,600 (duties, levies, port & clearing included).”
+              </p>
+            </div>
+
+            <!-- VIN check teaser -->
+            <div class="tool-card">
+              <h3>VIN risk check (what we screen for)</h3>
+              <div class="tool-row two">
+                <div>
+                  <div class="field-label">Sample VIN</div>
+                  <input class="field-input" type="text" placeholder="e.g. 1HGCM82633A0…" />
+                </div>
+                <div style="align-self:flex-end;">
+                  <button class="btn btn-ghost-dark" type="button">
+                    Show sample report
+                  </button>
+                </div>
+              </div>
+              <p class="est-output">
+                We screen for theft status, salvage history, mileage anomalies and cloned VIN patterns before you commit funds.
+              </p>
+            </div>
+          </div>
         </div>
 
+        <!-- Value chain explanation -->
         <aside class="hero-card">
-          <h2>Cross-border value flow</h2>
+          <h2>Cross-border value chain</h2>
           <p>
-            Auto-Bridge sits between Canadian sellers, VIN data providers, inspection agents,
-            shipping lines, Nigeria Customs brokers and local dealers to create a single,
-            trusted transaction pipeline.
+            Auto-Bridge is positioned at the centre of the Canada → Nigeria corridor, coordinating data,
+            inspections, logistics and Customs workflows for each transaction.
           </p>
-
           <div class="value-grid">
             <div class="value-col">
               <h3>North America</h3>
               <ul>
-                <li>Canadian auto sellers & auctions</li>
-                <li>Carfax-style VIN data</li>
+                <li>Canadian sellers / auctions</li>
+                <li>VIN data providers (e.g. Carfax)</li>
                 <li>Certified inspection network</li>
                 <li>Trucking companies</li>
               </ul>
@@ -536,18 +822,17 @@
             <div class="value-col">
               <h3>Nigeria</h3>
               <ul>
-                <li>Auto dealers & fleet operators</li>
-                <li>Nigeria Customs brokers</li>
+                <li>Independent dealers & fleets</li>
+                <li>Licensed Customs brokers</li>
                 <li>Shipping lines / freight forwarders</li>
               </ul>
             </div>
           </div>
-
           <div class="value-bridge">
             <strong>Auto-Bridge (trust & cost-intelligence layer)</strong>
             <span>
-              Connects all parties, verifies vehicles, computes landed cost and orchestrates
-              documentation and tracking across the corridor.
+              Connects all parties, verifies vehicles, computes landed-cost estimates and orchestrates
+              documentation and tracking until clearance.
             </span>
           </div>
         </aside>
@@ -559,67 +844,84 @@
       <!-- PROBLEM -->
       <section class="section" id="problem">
         <div class="section-inner">
-          <h2 class="section-title">The problem we solve</h2>
+          <h2 class="section-title">The problem we address</h2>
           <p class="section-lead">
-            The Canada → Nigeria import corridor is characterised by fraud, opaque landed costs and customs uncertainty.
-            Dealers currently carry significant financial risk on every shipment.
+            Between Canadian auctions and Lagos ports, dealers face opaque pricing, enforcement risk
+            and incomplete information. The result: margin loss, delays and in some cases abandoned imports.
           </p>
           <div class="card-grid-3">
             <article class="card">
               <h3>VIN fraud & misrepresentation</h3>
               <p>
-                Cloned or invalid VINs, incomplete history and salvage titles make it difficult to know what is
-                truly being purchased from overseas sellers or auctions.
+                Cloned or invalid VINs, salvage histories and incomplete disclosures make it difficult to know
+                what is truly being purchased before payment leaves Nigeria.
               </p>
             </article>
             <article class="card">
               <h3>Unpredictable landed cost</h3>
               <p>
-                Duties, levies, port charges and FX movements mean the final cost of a vehicle can diverge sharply
-                from expectations — eroding margins and trust.
+                Duties, levies, port charges and FX movements mean the final cost of each vehicle can diverge
+                sharply from expectations, undermining dealer pricing and planning.
               </p>
             </article>
             <article class="card">
               <h3>Customs delays & penalties</h3>
               <p>
-                Missing or inconsistent documentation leads to valuation disputes, storage fees and delayed delivery
-                to end-customers.
+                Missing or inconsistent documentation leads to valuation disputes, storage fees and delayed
+                release at Apapa, Tin Can or Onne.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- WHO WE SERVE -->
-      <section class="section" id="dealers">
+      <!-- CUSTOMERS (TABS FOR DEALERS / DIASPORA) -->
+      <section class="section" id="customers">
         <div class="section-inner">
-          <h2 class="section-title">Who we serve</h2>
+          <h2 class="section-title">Who uses Auto-Bridge?</h2>
           <p class="section-lead">
-            Auto-Bridge is built for high-stakes import decisions on the Canada → Lagos lane, with a focus on structured,
-            measurable value.
+            We serve decision makers responsible for cross-border sourcing on the Canada → Nigeria lane,
+            starting with independent dealers importing 100–300 vehicles annually.
           </p>
-          <div class="card-grid-3">
-            <article class="card card-soft">
-              <h3>Independent auto dealers</h3>
+
+          <div class="tabs" id="customerTabs">
+            <div class="tab-header-row">
+              <div class="tab-toggle active" data-tab="dealers">For dealers & fleets</div>
+              <div class="tab-toggle" data-tab="diaspora">For diaspora shippers</div>
+            </div>
+            <div class="tab-panel active" id="tab-dealers">
+              <h3>Independent dealers & fleet operators</h3>
               <p>
-                Importing 100–300 vehicles per year and seeking verifiable offers, accurate landed-cost visibility
-                and faster, more predictable clearance.
+                A control panel for managing verification, cost estimation and logistics of each import from Canada.
+                Built to replace spreadsheets and ad-hoc WhatsApp threads between multiple intermediaries.
               </p>
-            </article>
-            <article class="card card-soft">
-              <h3>Fleet operators</h3>
-              <p>
-                Ride-hailing and logistics businesses requiring sound, low-maintenance vehicles and transparent
-                total cost of acquisition.
+              <ul class="pill-list">
+                <li class="pill">100–300 vehicles / year</li>
+                <li class="pill">Canada → Lagos focus</li>
+                <li class="pill">Uses auctions like Copart, etc.</li>
+                <li class="pill">Requires predictable landed cost</li>
+              </ul>
+              <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem;">
+                In the pilot phase, we work closely with a small cohort of Lagos-based dealers to validate landed-cost
+                accuracy and end-to-end workflow performance.
               </p>
-            </article>
-            <article class="card card-soft">
+            </div>
+            <div class="tab-panel" id="tab-diaspora">
               <h3>Diaspora shippers (roadmap)</h3>
               <p>
-                Nigerians in Canada shipping vehicles and personal cargo to Lagos, expecting predictable cost,
-                compliant paperwork and trusted delivery partners.
+                A simplified experience for Nigerians in Canada shipping personal vehicles or consolidated cargo home.
+                Provides upfront quotes, documentation guidance and tracking to port or final delivery.
               </p>
-            </article>
+              <ul class="pill-list">
+                <li class="pill">Door-to-port or door-to-door</li>
+                <li class="pill">Cars, personal effects, small machinery</li>
+                <li class="pill">Single shipment or recurring</li>
+              </ul>
+              <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem;">
+                The underlying cost engine and logistics network are the same; the interface is tuned for
+                one-off shipments instead of dealer inventory volumes.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -627,20 +929,20 @@
       <!-- HOW IT WORKS -->
       <section class="section" id="how">
         <div class="section-inner">
-          <h2 class="section-title">How Auto-Bridge works</h2>
+          <h2 class="section-title">How the workflow operates</h2>
           <p class="section-lead">
-            A structured workflow that links Canadian sellers, VIN data, inspections, logistics and Nigerian Customs into
-            one transparent process.
+            Auto-Bridge links Canadian sellers, VIN data, inspection capacity, logistics providers and
+            Nigeria Customs brokers into a single, traceable process.
           </p>
 
           <div class="steps">
             <div class="step">
               <span class="step-number">1</span>
               <div>
-                <h3>Select & verify vehicle</h3>
+                <h3>Vehicle selection & VIN screening</h3>
                 <p>
-                  Auto-Bridge connects to Canadian sellers and auctions and runs VIN history checks. Certified inspectors
-                  perform on-site visual and mechanical checks before funds are committed.
+                  Dealers submit vehicle details or auction IDs. Auto-Bridge runs VIN history checks, screening for
+                  theft, salvage and mileage anomalies before bids are placed or payments are approved.
                 </p>
               </div>
             </div>
@@ -648,10 +950,10 @@
             <div class="step">
               <span class="step-number">2</span>
               <div>
-                <h3>See true landed cost</h3>
+                <h3>Certified inspection</h3>
                 <p>
-                  Our cost-intelligence engine combines FOB value, freight, duties, levies, port and clearing fees to
-                  generate a pre-purchase landed-cost estimate.
+                  Canada-based inspectors conduct structured photo/video reviews and basic mechanical checks. Reports
+                  are shared through the dealer portal for decision making.
                 </p>
               </div>
             </div>
@@ -659,10 +961,10 @@
             <div class="step">
               <span class="step-number">3</span>
               <div>
-                <h3>Book logistics & documentation</h3>
+                <h3>Landed-cost estimation</h3>
                 <p>
-                  Auto-Bridge coordinates trucking to port, ocean shipping and pre-files documentation with vetted
-                  Nigeria Customs brokers and shipping lines.
+                  Our cost engine combines FOB, freight, duties, levies, port and clearing fees to offer a pre-purchase
+                  landed-cost estimate, with variance bands reflecting regulatory and FX conditions.
                 </p>
               </div>
             </div>
@@ -670,10 +972,21 @@
             <div class="step">
               <span class="step-number">4</span>
               <div>
-                <h3>Track until delivery</h3>
+                <h3>Logistics & documentation</h3>
                 <p>
-                  Dealers can monitor each stage — from pickup in Canada through port discharge and clearance
-                  at Apapa or Tin Can — with delays or exceptions highlighted in the platform.
+                  Auto-Bridge coordinates trucking to port, shipping line bookings and Customs documentation via licensed
+                  brokers, aligned with e-Customs and AEO processes where available.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <span class="step-number">5</span>
+              <div>
+                <h3>Tracking & clearance</h3>
+                <p>
+                  Dealers track progress from Canada to Lagos via the portal, with notifications for key milestones:
+                  inspection complete, vessel sailed, vessel arrived, clearance completed.
                 </p>
               </div>
             </div>
@@ -681,55 +994,108 @@
         </div>
       </section>
 
-      <!-- FEATURES -->
-      <section class="section" id="features">
+      <!-- DEALER DASHBOARD PREVIEW -->
+      <section class="section" id="dashboard">
         <div class="section-inner">
-          <h2 class="section-title">Core features</h2>
+          <h2 class="section-title">Dealer portal preview</h2>
           <p class="section-lead">
-            Auto-Bridge provides a single control panel for verification, costing, compliance and shipment tracking.
+            A front-end workspace for managing Canadian imports: one place to view live shipments, verification
+            results and documentation status.
           </p>
-          <div class="card-grid-3">
-            <article class="card">
-              <h3>VIN verification & history</h3>
-              <p>
-                Integration with recognised VIN data sources to identify theft, salvage and mileage anomalies before
-                purchase decisions are made.
+
+          <div class="dash-grid">
+            <!-- Left: table & KPIs -->
+            <div class="dash-panel">
+              <h3>Today’s overview</h3>
+              <div class="dash-kpis">
+                <div class="kpi-card">
+                  <div class="kpi-label">Shipments in progress</div>
+                  <div class="kpi-value">6</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Waiting for approval</div>
+                  <div class="kpi-value">2</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Verified vehicles</div>
+                  <div class="kpi-value">38</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-label">Avg. landed-cost variance</div>
+                  <div class="kpi-value">±12.4%</div>
+                </div>
+              </div>
+
+              <table class="ship-table" aria-label="Example dealer shipments">
+                <thead>
+                  <tr>
+                    <th>Vehicle</th>
+                    <th>VIN</th>
+                    <th>Status</th>
+                    <th>Port</th>
+                    <th>ETA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2019 Toyota RAV4</td>
+                    <td>…3A0129</td>
+                    <td><span class="badge badge-green">Cleared</span></td>
+                    <td>Apapa</td>
+                    <td>Delivered</td>
+                  </tr>
+                  <tr>
+                    <td>2018 Honda Civic</td>
+                    <td>…7H2231</td>
+                    <td><span class="badge badge-blue">On water</span></td>
+                    <td>Tin Can</td>
+                    <td>10 days</td>
+                  </tr>
+                  <tr>
+                    <td>2020 Ford F-150</td>
+                    <td>…9F8890</td>
+                    <td><span class="badge badge-amber">Awaiting approval</span></td>
+                    <td>Apapa</td>
+                    <td>Quote ready</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p class="dash-note">
+                The production portal will allow dealers to filter by status, export records, and drill into
+                each shipment’s documents and cost breakdowns.
               </p>
-            </article>
-            <article class="card">
-              <h3>Certified virtual inspections</h3>
-              <p>
-                Canada-based inspectors supply structured photo and video evidence of vehicle condition and highlight
-                visible structural issues.
+            </div>
+
+            <!-- Right: timeline of a single shipment -->
+            <div class="dash-panel">
+              <h3>Example shipment timeline</h3>
+              <p class="dash-note">
+                A single shipment view displaying milestones and related documents.
               </p>
-            </article>
-            <article class="card">
-              <h3>Landed-cost engine</h3>
-              <p>
-                A structured calculator combining FOB, freight, duties, levies, port and clearing fees to support more
-                accurate pricing decisions.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Compliance & documentation hub</h3>
-              <p>
-                Support for Form M, PAAR, SONCAP and related documentation via vetted Nigeria Customs brokers aligned
-                with ongoing e-Customs reforms.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Shipment tracking dashboard</h3>
-              <p>
-                A unified view of status across trucking, loading, ocean transit, port arrival and clearance events.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Support & dispute resolution</h3>
-              <p>
-                Structured processes for addressing discrepancies between expected and actual condition, costs or
-                timelines.
-              </p>
-            </article>
+              <div class="timeline">
+                <div class="timeline-step">
+                  <strong>Vehicle verified</strong><br />
+                  VIN history and inspection report cleared. No major red flags.
+                </div>
+                <div class="timeline-step">
+                  <strong>Landed-cost approved</strong><br />
+                  Dealer confirmed estimate including duties, levies, port & clearing fees.
+                </div>
+                <div class="timeline-step">
+                  <strong>Trucking & export booked</strong><br />
+                  Vehicle picked up in Canada and delivered to loading port.
+                </div>
+                <div class="timeline-step">
+                  <strong>Vessel departed</strong><br />
+                  Estimated time to Lagos: 24 days. Tracking updates available.
+                </div>
+                <div class="timeline-step">
+                  <strong>Arrival & clearance</strong><br />
+                  Customs release completed; vehicle available for dealer pickup.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -739,57 +1105,41 @@
         <div class="section-inner">
           <h2 class="section-title">Pricing model</h2>
           <p class="section-lead">
-            Transaction-linked pricing aligned with delivered value. Exact fees are calibrated during pilot based
-            on volume and service scope.
+            Pricing is transaction-linked and aligned with delivered value. Exact figures are finalised with
+            each dealer based on volume and scope of services.
           </p>
 
           <div class="pricing-grid">
             <div class="pricing-card">
-              <h3>Verification package</h3>
-              <p class="pricing-price">Per vehicle</p>
+              <h3 class="pricing-title">Verification package</h3>
+              <p class="pricing-price">Per vehicle · fixed fee</p>
               <ul>
                 <li>VIN history and fraud screening</li>
-                <li>Inspection summary and photo set</li>
-                <li>Landed-cost estimate report</li>
+                <li>Structured inspection summary</li>
+                <li>Landed-cost estimate for Lagos ports</li>
               </ul>
             </div>
             <div class="pricing-card highlight">
-              <h3>Full-service import</h3>
-              <p class="pricing-price">Transaction-based fee</p>
+              <h3 class="pricing-title">Full-service import</h3>
+              <p class="pricing-price">Transaction-based % of FOB</p>
               <ul>
                 <li>Verification package included</li>
                 <li>Trucking & ocean logistics coordination</li>
-                <li>Customs & clearance support in Lagos</li>
-                <li>End-to-end shipment tracking and reporting</li>
+                <li>Customs & clearing support via licensed brokers</li>
+                <li>End-to-end tracking within the dealer portal</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- PARTNERS & COMPLIANCE -->
-      <section class="section">
-        <div class="section-inner">
-          <h2 class="section-title">Partners & compliance alignment</h2>
-          <p class="section-lead">
-            Auto-Bridge is designed to interoperate with emerging Customs modernisation and trade-facilitation
-            initiatives in Nigeria.
-          </p>
-          <ul class="bullet-list">
-            <li>Integration with VIN data providers (for example, Carfax-style Canadian data sources).</li>
-            <li>Workflows compatible with Nigeria e-Customs, AEO and One-Stop Shop models.</li>
-            <li>Collaboration with shipping lines, freight forwarders and licensed Customs brokers.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
+      <!-- CONTACT / PILOT SIGNUP -->
       <section class="section" id="contact">
         <div class="section-inner">
-          <h2 class="section-title">Request pilot access</h2>
+          <h2 class="section-title">Join the dealer pilot</h2>
           <p class="section-lead">
-            We are onboarding a focused cohort of independent dealers and fleet operators who actively import
-            vehicles from Canada to Lagos.
+            We are partnering with a focused group of Lagos-based independent dealers and fleet operators
+            to validate and refine the Auto-Bridge workflow.
           </p>
 
           <form class="contact-form">
@@ -817,13 +1167,13 @@
 
             <div class="form-field">
               <label for="message">Message</label>
-              <textarea id="message" rows="4" placeholder="Share current challenges with your Canada → Nigeria imports."></textarea>
+              <textarea id="message" rows="4" placeholder="Describe your current Canada → Nigeria import process and key pain points."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit interest</button>
             <p class="form-note">
-              This form is a visual placeholder. When you go live, connect it to your preferred email address,
-              CRM or form-handling service.
+              This form is a visual placeholder. When ready, connect it to your preferred email, CRM or forms
+              service so submissions reach your team.
             </p>
           </form>
         </div>
@@ -839,8 +1189,29 @@
     </footer>
   </div>
 
+  <!-- Small JS only for year + tabs (no backend logic) -->
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Simple tab switching
+    const tabs = document.querySelectorAll(".tab-toggle");
+    const panels = {
+      dealers: document.getElementById("tab-dealers"),
+      diaspora: document.getElementById("tab-diaspora"),
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const key = tab.dataset.tab;
+
+        tabs.forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+
+        Object.keys(panels).forEach((name) => {
+          panels[name].classList.toggle("active", name === key);
+        });
+      });
+    });
   </script>
 </body>
 </html>
