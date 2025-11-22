@@ -4,366 +4,840 @@
   <meta charset="UTF-8" />
   <title>Auto-Bridge – Trusted Canada → Nigeria Vehicle Imports</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ---------- GLOBAL ---------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    :root {
+      --bg-dark: #020617;
+      --bg-darker: #020314;
+      --bg-light: #f8fafc;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --accent: #38bdf8;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-soft: #e2e8f0;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.16);
+      --shadow-card: 0 12px 30px rgba(15, 23, 42, 0.12);
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #0f172a, #020617);
+      color: var(--text-main);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ---------- LAYOUT HELPERS ---------- */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .section {
+      padding: 4rem 1.5rem;
+    }
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      margin: 0 0 0.5rem;
+    }
+    .section-lead {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: 2rem;
+    }
+
+    /* ---------- NAVBAR ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.72));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      color: #e5e7eb;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg, #22d3ee, #1d4ed8, #22c55e, #22d3ee);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.45);
+    }
+    .brand-name {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+    }
+    .nav-links {
+      display: none;
+      gap: 1rem;
+      font-size: 0.86rem;
+      opacity: 0.9;
+    }
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+    .nav-cta {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .nav-cta a {
+      font-size: 0.84rem;
+    }
+    .nav-link-light {
+      color: #cbd5f5;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.4rem 0.95rem;
+      border: 1px solid transparent;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease,
+        box-shadow 0.18s ease;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: #f9fafb;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 35px rgba(37, 99, 235, 0.55);
+    }
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 4.5rem 1.5rem 3.5rem;
+      color: #e5e7eb;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.35), transparent 55%),
+        radial-gradient(circle at 120% 0%, rgba(56, 189, 248, 0.3), transparent 55%),
+        linear-gradient(to bottom, #020617, #020314 55%, #020617 100%);
+      flex: 1;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2.75rem;
+    }
+    @media (min-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+        align-items: center;
+      }
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.68rem;
+      color: #a5b4fc;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-size: 2.3rem;
+      line-height: 1.1;
+      margin: 0 0 0.9rem;
+    }
+    .hero-sub {
+      font-size: 0.98rem;
+      max-width: 540px;
+      color: #cbd5f5;
+      margin-bottom: 1.1rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+    .hero-note {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    .hero-card {
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 22px;
+      padding: 1.6rem 1.5rem 1.4rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+    }
+    .hero-card h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
+    }
+    .hero-card p {
+      font-size: 0.84rem;
+      color: #cbd5f5;
+      margin-bottom: 1rem;
+    }
+
+    .value-grid {
+      display: grid;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+    @media (min-width: 600px) {
+      .value-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .value-col {
+      background: #020617;
+      border-radius: 14px;
+      padding: 0.8rem 0.9rem;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+    }
+    .value-col h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+    .value-col ul {
+      margin: 0;
+      padding-left: 1.05rem;
+      list-style: disc;
+      color: #cbd5f5;
+      font-size: 0.78rem;
+    }
+    .value-bridge {
+      border-radius: 14px;
+      padding: 0.75rem 0.9rem;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(129, 140, 248, 0.9);
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+    .value-bridge strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* ---------- CONTENT SECTIONS ---------- */
+    .content {
+      background: var(--bg-light);
+      border-radius: 28px 28px 0 0;
+      margin-top: -1px;
+      box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.4);
+    }
+
+    .card-grid-3 {
+      display: grid;
+      gap: 1.4rem;
+    }
+    @media (min-width: 900px) {
+      .card-grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.3rem 1.1rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+      font-size: 0.9rem;
+    }
+    .card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+    .card p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .card-soft {
+      background: #f9fafb;
+      box-shadow: none;
+    }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      gap: 1.1rem;
+    }
+    .step {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+    }
+    .step-number {
+      min-width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+    .step h3 {
+      margin: 0 0 0.3rem;
+      font-size: 0.98rem;
+    }
+    .step p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .pricing-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem 1.2rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+      font-size: 0.9rem;
+    }
+    .pricing-card.highlight {
+      border-color: var(--primary);
+      box-shadow: 0 18px 45px rgba(37, 99, 235, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card.highlight::before {
+      content: "Most relevant for dealers";
+      position: absolute;
+      top: 0.9rem;
+      right: 1rem;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: #1d4ed8;
+    }
+    .pricing-card h3 {
+      margin: 0 0 0.2rem;
+    }
+    .pricing-price {
+      font-weight: 600;
+      margin: 0 0 0.7rem;
+      font-size: 0.95rem;
+    }
+    .pricing-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--text-muted);
+    }
+    .pricing-card li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* Contact form (non-functional placeholder) */
+    .contact-form {
+      max-width: 720px;
+      font-size: 0.9rem;
+    }
+    .form-row {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .form-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .form-field {
+      margin-bottom: 1rem;
+    }
+    .form-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      padding: 0.55rem 0.7rem;
+      font: inherit;
+      resize: vertical;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 1px;
+    }
+    .form-note {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Partner list */
+    .bullet-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .bullet-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-darker);
+      color: #9ca3af;
+      font-size: 0.8rem;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    @media (min-width: 700px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header class="nav">
-    <div class="nav-inner">
-      <div class="brand">
-        <div class="brand-logo"></div>
-        <span>Auto-Bridge</span>
-      </div>
-      <nav class="nav-links">
-        <a href="#how">How it works</a>
-        <a href="#features">Features</a>
-        <a href="#dealers">For dealers</a>
-        <a href="#partners">Partners</a>
-        <a href="#pricing">Pricing</a>
-      </nav>
-      <div class="nav-cta">
-        <a href="#contact" class="link-light">Sign in</a>
-        <a href="#contact" class="btn-primary">Request pilot access</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <p class="eyebrow">Canada → Nigeria vehicle & cargo corridor</p>
-        <h1>Trusted cross-border vehicle imports for Nigerian dealers and importers.</h1>
-        <p class="hero-sub">
-          Auto-Bridge verifies vehicles, calculates true landed cost, aligns documentation with
-          Nigerian Customs, and tracks every shipment end-to-end.
-        </p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn-primary">Request pilot access</a>
-          <a href="#how" class="btn-ghost">See how it works</a>
+  <div class="page">
+    <!-- NAVBAR -->
+    <header class="nav">
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="brand-mark"></div>
+          <div class="brand-name">AUTO-BRIDGE</div>
         </div>
-        <p class="hero-footnote">
-          Built for independent dealers, fleet operators, and diaspora shippers.
-        </p>
+        <nav class="nav-links">
+          <a href="#how">How it works</a>
+          <a href="#problem">Problem</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Pilot</a>
+        </nav>
+        <div class="nav-cta">
+          <a href="#contact" class="nav-link-light">Sign in</a>
+          <a href="#contact" class="btn btn-primary">Request pilot access</a>
+        </div>
       </div>
+    </header>
 
-      <div class="hero-card">
-        <h2>Cross-border value flow</h2>
-        <p class="hero-card-text">
-          Auto-Bridge sits between Canadian sellers, VIN data providers, inspection agents,
-          shipping lines, Nigeria Customs brokers and local dealers to create a single,
-          trusted transaction pipeline.
-        </p>
-
-        <div class="value-grid">
-          <div class="value-col">
-            <h3>North America</h3>
-            <ul>
-              <li>Canadian auto sellers / auctions</li>
-              <li>Carfax VIN data</li>
-              <li>Certified inspection network</li>
-              <li>Trucking companies</li>
-            </ul>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Canada → Nigeria vehicle & cargo corridor</p>
+          <h1 class="hero-title">
+            Trusted cross-border vehicle imports for Nigerian dealers and importers.
+          </h1>
+          <p class="hero-sub">
+            Auto-Bridge verifies vehicles, estimates true landed cost, aligns documentation with
+            Nigerian Customs and tracks every shipment end-to-end — so dealers can import with confidence.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Join the dealer pilot</a>
+            <a href="#how" class="btn btn-ghost">See how it works</a>
           </div>
-          <div class="value-col">
-            <h3>Nigeria</h3>
-            <ul>
-              <li>Auto dealers & fleet operators</li>
-              <li>Nigeria Customs brokers</li>
-              <li>Shipping lines / freight forwarders</li>
-            </ul>
+          <p class="hero-note">
+            Designed for independent dealers, fleet operators and diaspora shippers who use the Canada → Lagos lane.
+          </p>
+        </div>
+
+        <aside class="hero-card">
+          <h2>Cross-border value flow</h2>
+          <p>
+            Auto-Bridge sits between Canadian sellers, VIN data providers, inspection agents,
+            shipping lines, Nigeria Customs brokers and local dealers to create a single,
+            trusted transaction pipeline.
+          </p>
+
+          <div class="value-grid">
+            <div class="value-col">
+              <h3>North America</h3>
+              <ul>
+                <li>Canadian auto sellers & auctions</li>
+                <li>Carfax-style VIN data</li>
+                <li>Certified inspection network</li>
+                <li>Trucking companies</li>
+              </ul>
+            </div>
+            <div class="value-col">
+              <h3>Nigeria</h3>
+              <ul>
+                <li>Auto dealers & fleet operators</li>
+                <li>Nigeria Customs brokers</li>
+                <li>Shipping lines / freight forwarders</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="value-bridge">
-          <strong>Auto-Bridge (trust & cost-intelligence layer)</strong>
-          <p>
-            Connects all parties, verifies data, computes landed cost and orchestrates
-            documentation and tracking across the corridor.
-          </p>
-        </div>
+          <div class="value-bridge">
+            <strong>Auto-Bridge (trust & cost-intelligence layer)</strong>
+            <span>
+              Connects all parties, verifies vehicles, computes landed cost and orchestrates
+              documentation and tracking across the corridor.
+            </span>
+          </div>
+        </aside>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PROBLEM -->
-  <section class="section" id="problem">
-    <div class="section-inner">
-      <h2>The problem we solve</h2>
-      <p class="section-lead">
-        The Canada → Nigeria vehicle import corridor is characterised by fraud, opaque landed
-        costs and customs uncertainty. Dealers carry high financial risk on every shipment.
-      </p>
-      <div class="cards-3">
-        <article class="card">
-          <h3>VIN fraud & misrepresentation</h3>
-          <p>
-            Cloned or invalid VINs, salvage histories and incomplete disclosure make it difficult
-            to know what is really being purchased.
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- PROBLEM -->
+      <section class="section" id="problem">
+        <div class="section-inner">
+          <h2 class="section-title">The problem we solve</h2>
+          <p class="section-lead">
+            The Canada → Nigeria import corridor is characterised by fraud, opaque landed costs and customs uncertainty.
+            Dealers currently carry significant financial risk on every shipment.
           </p>
-        </article>
-        <article class="card">
-          <h3>Unpredictable landed cost</h3>
-          <p>
-            Duties, levies, port charges and FX volatility mean the final cost often diverges
-            significantly from initial expectations.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Customs delays & penalties</h3>
-          <p>
-            Missing or inconsistent documentation leads to valuation disputes, storage fees and
-            delayed delivery to end-buyers.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHO WE SERVE -->
-  <section class="section alt" id="dealers">
-    <div class="section-inner">
-      <h2>Who we serve</h2>
-      <p class="section-lead">
-        Auto-Bridge is designed for high-risk, high-volume import decision makers on the Canada → Nigeria lane.
-      </p>
-      <div class="cards-3">
-        <article class="card">
-          <h3>Independent auto dealers</h3>
-          <p>
-            Importing 100–300 vehicles per year from North America and seeking predictable,
-            verifiable offers with reliable clearance outcomes.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Fleet operators</h3>
-          <p>
-            Ride-hailing and logistics fleets requiring mechanically sound, low-maintenance vehicles
-            and transparent total cost of ownership.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Diaspora shippers (roadmap)</h3>
-          <p>
-            Nigerians in Canada shipping vehicles and personal cargo to Lagos with predictable cost,
-            documentation handled and minimal last-mile friction.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section" id="how">
-    <div class="section-inner">
-      <h2>How Auto-Bridge works</h2>
-      <p class="section-lead">
-        A single workflow connecting Canadian sellers, VIN data, inspections, logistics and Nigerian Customs.
-      </p>
-
-      <div class="steps">
-        <div class="step">
-          <span class="step-number">1</span>
-          <div>
-            <h3>Select & verify vehicle</h3>
-            <p>
-              Auto-Bridge connects to Canadian sellers and auctions and performs VIN history checks.
-              Certified inspectors confirm actual condition on site before funds are committed.
-            </p>
+          <div class="card-grid-3">
+            <article class="card">
+              <h3>VIN fraud & misrepresentation</h3>
+              <p>
+                Cloned or invalid VINs, incomplete history and salvage titles make it difficult to know what is
+                truly being purchased from overseas sellers or auctions.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Unpredictable landed cost</h3>
+              <p>
+                Duties, levies, port charges and FX movements mean the final cost of a vehicle can diverge sharply
+                from expectations — eroding margins and trust.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Customs delays & penalties</h3>
+              <p>
+                Missing or inconsistent documentation leads to valuation disputes, storage fees and delayed delivery
+                to end-customers.
+              </p>
+            </article>
           </div>
         </div>
+      </section>
 
-        <div class="step">
-          <span class="step-number">2</span>
-          <div>
-            <h3>See true landed cost</h3>
-            <p>
-              Our cost-intelligence engine combines FOB price, freight, duties, levies, port charges
-              and clearing rules to provide a pre-purchase landed-cost estimate.
-            </p>
+      <!-- WHO WE SERVE -->
+      <section class="section" id="dealers">
+        <div class="section-inner">
+          <h2 class="section-title">Who we serve</h2>
+          <p class="section-lead">
+            Auto-Bridge is built for high-stakes import decisions on the Canada → Lagos lane, with a focus on structured,
+            measurable value.
+          </p>
+          <div class="card-grid-3">
+            <article class="card card-soft">
+              <h3>Independent auto dealers</h3>
+              <p>
+                Importing 100–300 vehicles per year and seeking verifiable offers, accurate landed-cost visibility
+                and faster, more predictable clearance.
+              </p>
+            </article>
+            <article class="card card-soft">
+              <h3>Fleet operators</h3>
+              <p>
+                Ride-hailing and logistics businesses requiring sound, low-maintenance vehicles and transparent
+                total cost of acquisition.
+              </p>
+            </article>
+            <article class="card card-soft">
+              <h3>Diaspora shippers (roadmap)</h3>
+              <p>
+                Nigerians in Canada shipping vehicles and personal cargo to Lagos, expecting predictable cost,
+                compliant paperwork and trusted delivery partners.
+              </p>
+            </article>
           </div>
         </div>
+      </section>
 
-        <div class="step">
-          <span class="step-number">3</span>
-          <div>
-            <h3>Book logistics & documentation</h3>
-            <p>
-              Auto-Bridge coordinates trucking, ocean shipping and pre-files Customs documentation
-              via vetted Nigeria Customs brokers and shipping lines.
-            </p>
+      <!-- HOW IT WORKS -->
+      <section class="section" id="how">
+        <div class="section-inner">
+          <h2 class="section-title">How Auto-Bridge works</h2>
+          <p class="section-lead">
+            A structured workflow that links Canadian sellers, VIN data, inspections, logistics and Nigerian Customs into
+            one transparent process.
+          </p>
+
+          <div class="steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div>
+                <h3>Select & verify vehicle</h3>
+                <p>
+                  Auto-Bridge connects to Canadian sellers and auctions and runs VIN history checks. Certified inspectors
+                  perform on-site visual and mechanical checks before funds are committed.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <span class="step-number">2</span>
+              <div>
+                <h3>See true landed cost</h3>
+                <p>
+                  Our cost-intelligence engine combines FOB value, freight, duties, levies, port and clearing fees to
+                  generate a pre-purchase landed-cost estimate.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <span class="step-number">3</span>
+              <div>
+                <h3>Book logistics & documentation</h3>
+                <p>
+                  Auto-Bridge coordinates trucking to port, ocean shipping and pre-files documentation with vetted
+                  Nigeria Customs brokers and shipping lines.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <span class="step-number">4</span>
+              <div>
+                <h3>Track until delivery</h3>
+                <p>
+                  Dealers can monitor each stage — from pickup in Canada through port discharge and clearance
+                  at Apapa or Tin Can — with delays or exceptions highlighted in the platform.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="step">
-          <span class="step-number">4</span>
-          <div>
-            <h3>Track until delivery</h3>
-            <p>
-              Dealers monitor every stage from pickup in Canada to discharge at Apapa or Tin Can,
-              with exceptions and delays flagged in the platform.
-            </p>
+      <!-- FEATURES -->
+      <section class="section" id="features">
+        <div class="section-inner">
+          <h2 class="section-title">Core features</h2>
+          <p class="section-lead">
+            Auto-Bridge provides a single control panel for verification, costing, compliance and shipment tracking.
+          </p>
+          <div class="card-grid-3">
+            <article class="card">
+              <h3>VIN verification & history</h3>
+              <p>
+                Integration with recognised VIN data sources to identify theft, salvage and mileage anomalies before
+                purchase decisions are made.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Certified virtual inspections</h3>
+              <p>
+                Canada-based inspectors supply structured photo and video evidence of vehicle condition and highlight
+                visible structural issues.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Landed-cost engine</h3>
+              <p>
+                A structured calculator combining FOB, freight, duties, levies, port and clearing fees to support more
+                accurate pricing decisions.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Compliance & documentation hub</h3>
+              <p>
+                Support for Form M, PAAR, SONCAP and related documentation via vetted Nigeria Customs brokers aligned
+                with ongoing e-Customs reforms.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Shipment tracking dashboard</h3>
+              <p>
+                A unified view of status across trucking, loading, ocean transit, port arrival and clearance events.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Support & dispute resolution</h3>
+              <p>
+                Structured processes for addressing discrepancies between expected and actual condition, costs or
+                timelines.
+              </p>
+            </article>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="blueprint">
-        <h3>Value blueprint</h3>
-        <p>
-          The platform implements this flow across stakeholders. A visual representation can be
-          embedded below for detailed stakeholder mapping.
-        </p>
-        <img src="assets/value-blueprint.png" alt="Auto-Bridge value blueprint diagram" />
-      </div>
-    </div>
-  </section>
+      <!-- PRICING -->
+      <section class="section" id="pricing">
+        <div class="section-inner">
+          <h2 class="section-title">Pricing model</h2>
+          <p class="section-lead">
+            Transaction-linked pricing aligned with delivered value. Exact fees are calibrated during pilot based
+            on volume and service scope.
+          </p>
 
-  <!-- FEATURES -->
-  <section class="section alt" id="features">
-    <div class="section-inner">
-      <h2>Core features</h2>
-      <p class="section-lead">
-        Auto-Bridge provides a single platform to de-risk sourcing, costing, documentation and shipment tracking.
-      </p>
-      <div class="cards-3">
-        <article class="card">
-          <h3>VIN verification & history</h3>
-          <p>
-            Integration with recognised VIN data providers to identify theft, salvage and mileage anomalies
-            before purchase.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Certified virtual inspections</h3>
-          <p>
-            Canada-based inspectors supply photo and video evidence of vehicle condition and highlight
-            structural or mechanical issues.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Landed-cost engine</h3>
-          <p>
-            Structured calculator combining FOB, freight rates, duties, levies, port and clearing fees to
-            support accurate pricing.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Compliance & documentation hub</h3>
-          <p>
-            Support for Form M, PAAR, SONCAP and other documentation via vetted Nigeria Customs brokers
-            aligned with ongoing e-Customs reforms.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Shipment tracking dashboard</h3>
-          <p>
-            A unified view of vehicle status across trucking, loading, ocean transit, port arrival and clearance.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Support & dispute resolution</h3>
-          <p>
-            Structured processes for handling discrepancies and ensuring issues are escalated and resolved.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
+          <div class="pricing-grid">
+            <div class="pricing-card">
+              <h3>Verification package</h3>
+              <p class="pricing-price">Per vehicle</p>
+              <ul>
+                <li>VIN history and fraud screening</li>
+                <li>Inspection summary and photo set</li>
+                <li>Landed-cost estimate report</li>
+              </ul>
+            </div>
+            <div class="pricing-card highlight">
+              <h3>Full-service import</h3>
+              <p class="pricing-price">Transaction-based fee</p>
+              <ul>
+                <li>Verification package included</li>
+                <li>Trucking & ocean logistics coordination</li>
+                <li>Customs & clearance support in Lagos</li>
+                <li>End-to-end shipment tracking and reporting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <!-- PRICING (simple placeholder) -->
-  <section class="section" id="pricing">
-    <div class="section-inner">
-      <h2>Pricing model</h2>
-      <p class="section-lead">
-        Transparent, transaction-linked pricing aligned with delivered value.
-      </p>
-      <div class="pricing">
-        <div class="card">
-          <h3>Verification package</h3>
-          <p class="pricing-price">Per vehicle</p>
-          <ul>
-            <li>VIN history report</li>
-            <li>Inspection summary</li>
-            <li>Landed-cost report</li>
+      <!-- PARTNERS & COMPLIANCE -->
+      <section class="section">
+        <div class="section-inner">
+          <h2 class="section-title">Partners & compliance alignment</h2>
+          <p class="section-lead">
+            Auto-Bridge is designed to interoperate with emerging Customs modernisation and trade-facilitation
+            initiatives in Nigeria.
+          </p>
+          <ul class="bullet-list">
+            <li>Integration with VIN data providers (for example, Carfax-style Canadian data sources).</li>
+            <li>Workflows compatible with Nigeria e-Customs, AEO and One-Stop Shop models.</li>
+            <li>Collaboration with shipping lines, freight forwarders and licensed Customs brokers.</li>
           </ul>
         </div>
-        <div class="card card-highlight">
-          <h3>Full-service import</h3>
-          <p class="pricing-price">Transaction-based fee</p>
-          <ul>
-            <li>Verification package</li>
-            <li>Logistics coordination</li>
-            <li>Customs & clearance support</li>
-            <li>Shipment tracking</li>
-          </ul>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="section-inner">
+          <h2 class="section-title">Request pilot access</h2>
+          <p class="section-lead">
+            We are onboarding a focused cohort of independent dealers and fleet operators who actively import
+            vehicles from Canada to Lagos.
+          </p>
+
+          <form class="contact-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Full name" />
+              </div>
+              <div class="form-field">
+                <label for="company">Company</label>
+                <input id="company" type="text" placeholder="Dealer or fleet name" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="name@example.com" />
+              </div>
+              <div class="form-field">
+                <label for="volume">Vehicles imported per year</label>
+                <input id="volume" type="text" placeholder="e.g. 150" />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="message">Message</label>
+              <textarea id="message" rows="4" placeholder="Share current challenges with your Canada → Nigeria imports."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit interest</button>
+            <p class="form-note">
+              This form is a visual placeholder. When you go live, connect it to your preferred email address,
+              CRM or form-handling service.
+            </p>
+          </form>
         </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <p>© <span id="year"></span> Auto-Bridge Technologies. All rights reserved.</p>
+        <p>Built for the Canada → Nigeria vehicle and cargo corridor.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- PARTNERS -->
-  <section class="section alt" id="partners">
-    <div class="section-inner">
-      <h2>Partners & compliance alignment</h2>
-      <p class="section-lead">
-        Auto-Bridge is designed to align with ongoing Nigeria Customs modernisation
-        and cross-border trade standards.
-      </p>
-      <ul class="partner-list">
-        <li>Integration with VIN data providers (e.g. Carfax Canada).</li>
-        <li>Workflows compatible with Nigeria e-Customs, AEO and One-Stop Shop initiatives.</li>
-        <li>Collaboration with shipping lines, freight forwarders and licensed Nigeria Customs brokers.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CONTACT / CTA -->
-  <section class="section" id="contact">
-    <div class="section-inner">
-      <h2>Request pilot access</h2>
-      <p class="section-lead">
-        We are onboarding a focused cohort of independent dealers and fleet operators importing from Canada.
-      </p>
-      <form class="contact-form">
-        <div class="form-row">
-          <div class="form-field">
-            <label for="name">Name</label>
-            <input id="name" type="text" placeholder="Full name" />
-          </div>
-          <div class="form-field">
-            <label for="company">Company</label>
-            <input id="company" type="text" placeholder="Dealer or fleet name" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="name@example.com" />
-          </div>
-          <div class="form-field">
-            <label for="volume">Vehicles imported per year</label>
-            <input id="volume" type="text" placeholder="e.g. 120" />
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="message">Message</label>
-          <textarea id="message" rows="4" placeholder="Share current challenges with your Canada → Nigeria imports."></textarea>
-        </div>
-        <button type="submit" class="btn-primary">Submit interest</button>
-        <p class="form-note">
-          This form is a placeholder; connect it to your preferred CRM or email handler when you go live.
-        </p>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <p>© <span id="year"></span> Auto-Bridge Technologies. All rights reserved.</p>
-      <p>Built for the Canada → Nigeria vehicle and cargo corridor.</p>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
